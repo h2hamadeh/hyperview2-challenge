@@ -5,8 +5,9 @@
 experiment:
   name: hyperview2_baseline
   random_seed: 42
-  strict_validation: false  # Set True to stop pipeline if validation fails
+  strict_validation: false   # Set true to abort pipeline if validation fails
 
+# Data Paths
 data:
   root_dir: data
   raw_dir: data/raw
@@ -22,6 +23,7 @@ data:
       - msi_satellite
       - hsi_satellite
 
+# Training
 train:
   val_split: 0.7
   shuffle: true
@@ -29,14 +31,28 @@ train:
   model_dir: "features"
   log_transform: true
 
+# Feature Selection (per modality, before PCA)
+# variance filter → correlation filter → StandardScaler → PCA
+feature_selection:
+  use_variance_filter: false
+  variance_threshold: 5.0
+
+  use_correlation_filter: false
+  correlation_threshold: 0.99
+
+  use_scaler: true
+
+# PCA (n_components per modality)
 pca:
   msi: 10
   hsi: 10
   airborne: 30
 
+# Modality Dropout (for airborne HSI)
 dropout:
-  airborne: 0.05  # Probability of dropping airborne HSI during training
+  airborne: 0.05
 
+# Target Variables
 targets:
   columns:
     - B
@@ -46,10 +62,13 @@ targets:
     - S
     - Mn
 
+# XAI
 xai:
   enabled: false
   output_dir: xai_results
+  wavelengths_path: data\wavelengths.json
 
+# Data Validation
 validation:
   enabled: true
   strict: false
@@ -64,24 +83,23 @@ validation:
   thresholds:
     max_zero_soil_fraction: 1
 
+# Model
 model:
-  type: random_forest  # or xgboost
-  
-  # Random Forest parameters
+  type: random_forest
+
   random_forest:
-    n_estimators: 50
+    n_estimators: 1000
     max_depth: 15
     min_samples_split: 5
     min_samples_leaf: 2
     seed: 42
     n_jobs: 2
 
-  # XGBoost parameters
   xgboost:
     objective: reg:tweedie
     tweedie_variance_power: 1.5
     n_estimators: 100
     learning_rate: 0.1
-    max_depth: 6
+    max_depth: 5
     seed: 42
-    n_jobs: 2
+    n_jobs: 1

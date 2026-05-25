@@ -1,16 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jan  2 00:20:45 2026
-
-@author: Hachem
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Modality dropout for training robustness.
-
-Author: Hachem
-"""
 
 import numpy as np
 import random
@@ -25,12 +12,7 @@ def apply_dropout_dict(
     seed: int = 42,
     enable: bool = True
 ) -> np.ndarray:
-    """
-    Apply modality dropout (training only) and concatenate features.
 
-    dropout_config example:
-        {'hsi_airborne': 0.1}
-    """
     if not enable or not dropout_config:
         return concat_modalities_dict(X_dict)
 
@@ -66,9 +48,7 @@ def apply_dropout_dict(
 
 
 def concat_modalities_dict(X_dict: dict) -> np.ndarray:
-    """
-    Concatenate all available modalities without dropout.
-    """
+    
     arrays = [X for X in X_dict.values() if X.size > 0]
     if not arrays:
         return np.empty((0,))

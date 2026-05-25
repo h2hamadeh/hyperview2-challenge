@@ -1,16 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jan  2 00:20:45 2026
-
-@author: Hachem
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Data loading utilities for HYPERVIEW2 challenge.
-
-Author: Hachem
-"""
 
 from pathlib import Path
 import numpy as np
@@ -22,14 +9,7 @@ logger = logging.getLogger("hyperview2")
 
 
 def soil_masks(directory: Path, strict: bool = False) -> np.ndarray:
-    """
-    Load NPZ files and extract mean per-band soil pixel values.
-
-    Returns
-    -------
-    np.ndarray
-        Shape (n_samples, n_bands)
-    """
+    
     files = sorted(directory.glob("*.npz"))
 
     if not files:
@@ -68,9 +48,7 @@ def soil_masks(directory: Path, strict: bool = False) -> np.ndarray:
 
 
 def load_labels(csv_path: Path) -> np.ndarray:
-    """
-    Load ground truth CSV labels.
-    """
+    
     if not csv_path.exists():
         raise FileNotFoundError(f"GT CSV not found: {csv_path}")
 
@@ -90,9 +68,7 @@ def load_all_modalities(
     modalities: List[str],
     strict: bool = False
 ) -> dict:
-    """
-    Load all requested modalities into a dictionary.
-    """
+    
     data = {}
 
     for modality in modalities:
@@ -119,9 +95,7 @@ def train_val_split(
     shuffle: bool = True,
     random_seed: int = 42
 ) -> Tuple[dict, dict, np.ndarray, np.ndarray]:
-    """
-    Split data into train and validation sets.
-    """
+   
     n = len(y)
     idx = np.arange(n)
 

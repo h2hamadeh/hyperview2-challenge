@@ -1,16 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  4 00:19:59 2026
-
-@author: Hachem
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Model training utilities for HYPERVIEW2 challenge.
-
-Author: Hachem
-"""
 
 import time
 import numpy as np
@@ -32,23 +19,7 @@ def train_single_model(
     y: np.ndarray,
     model_cfg: dict
 ) -> Union[XGBRegressor, RandomForestRegressor]:
-    """
-    Train a single regressor (XGBoost or Random Forest based on config).
     
-    Parameters
-    ----------
-    X : np.ndarray
-        Training features
-    y : np.ndarray
-        Training target for single soil parameter
-    model_cfg : dict
-        Model configuration containing 'type' and model-specific parameters
-        
-    Returns
-    -------
-    Union[XGBRegressor, RandomForestRegressor]
-        Trained model instance
-    """
     model_type = model_cfg.get("type", "xgboost").lower()
     
     if model_type == "xgboost":
@@ -87,17 +58,11 @@ def train_models(
     config: dict,
     target_names: Optional[list] = None
 ) -> Dict[str, Union[XGBRegressor, RandomForestRegressor]]:
-    """
-    Train one model per soil parameter.
-    """
+
     targets = target_names or DEFAULT_TARGETS
     model_cfg = config.get("model", {})
-    
     model_type = model_cfg.get("type", "random_forest")
-    
-    logger.info("=" * 80)
-    logger.info(f"TRAINING MODELS ({model_type.upper()})")
-    logger.info("=" * 80)
+    logger.info(f"[MODEL] {model_type.upper()}")
 
     models = {}
     times = {}
@@ -126,9 +91,7 @@ def save_models(
     save_dir: Path,
     experiment_name: str
 ):
-    """
-    Save trained models to disk.
-    """
+    
     out_dir = Path(save_dir) / experiment_name
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -143,9 +106,7 @@ def load_models(
     experiment_name: str,
     target_names: Optional[list] = None
 ) -> Dict[str, Optional[Union[XGBRegressor, RandomForestRegressor]]]:
-    """
-    Load trained models from disk.
-    """
+    
     targets = target_names or DEFAULT_TARGETS
     in_dir = Path(load_dir) / experiment_name
 
@@ -167,9 +128,7 @@ def predict_all_targets(
     X: np.ndarray,
     target_names: Optional[list] = None
 ) -> np.ndarray:
-    """
-    Predict all soil parameters.
-    """
+    
     targets = target_names or DEFAULT_TARGETS
     preds = []
 
@@ -190,9 +149,7 @@ def train_and_save(
     config: dict,
     save_dir: Optional[Path] = None
 ) -> Dict[str, Union[XGBRegressor, RandomForestRegressor]]:
-    """
-    Train models and optionally save them.
-    """
+    
     models = train_models(X_train, y_train, config)
 
     if save_dir and config.get("train", {}).get("save_models", False):
