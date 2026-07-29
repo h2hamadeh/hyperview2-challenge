@@ -29,7 +29,7 @@ train:
   shuffle: true
   save_models: true
   model_dir: "features"
-  log_transform: true
+  log_transform: false
 
 # Feature Selection (per modality, before PCA)
 # variance filter → correlation filter → StandardScaler → PCA
@@ -64,7 +64,7 @@ targets:
 
 # XAI
 xai:
-  enabled: false
+  enabled: true
   output_dir: xai_results
   wavelengths_path: data\wavelengths.json
 
@@ -85,7 +85,7 @@ validation:
 
 # Model
 model:
-  type: random_forest
+  type: xgboost
 
   random_forest:
     n_estimators: 1000
