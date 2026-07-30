@@ -104,6 +104,7 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 │   └── wavelengths.json         # band center wavelengths per modality
 │
 ├── features/                    # saved preprocessors and models (auto-created)
+|   ├── hyperview2_baseline/     # model_{target}.pkl
 │   └── pca/                     # preprocessor_{modality}.pkl
 │
 ├── logs/                        # training logs (auto-created, not uploaded here)
