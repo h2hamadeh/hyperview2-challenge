@@ -95,6 +95,7 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 │       └── reproducibility.py  # global seed setting
 │
 ├── legacy/
+|   ├── starter_pack.py            # original script from organizers
 │   ├── random_forest_pipeline.py  # original script (RF, adjustable dropout)
 │   └── xgboost_pipeline.py        # original script (XGBoost, adjustable dropout)
 │
