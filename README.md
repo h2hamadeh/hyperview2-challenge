@@ -72,9 +72,11 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 
 ```
 ├── config.yaml                  # all experiment settings
-├── train_pipeline.py            # main training script
-├── generate_submission.py       # inference on test set into submission.csv
 │
+├── scripts/
+│   ├── train_pipeline.py            # main training script
+│   └── generate_submission.py       # inference on test set into submission.csv
+│   
 ├── src/
 │   ├── data/
 │   │   └── loaders.py           # NPZ loading, soil pixel extraction, train/val split
@@ -103,12 +105,13 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 │   │   └── train_gt.csv         # ground truth labels
 │   └── wavelengths.json         # band center wavelengths per modality
 │
-├── features/                    # saved preprocessors and models (auto-created)
+├── features/                    # saved preprocessors and models (auto-created, not uploaded here)
 |   ├── hyperview2_baseline/     # model_{target}.pkl
 │   └── pca/                     # preprocessor_{modality}.pkl
 │
-├── logs/                        # training logs (auto-created, not uploaded here)
-└── xai_results/                 # XAI plots and CSVs (auto-created)
+├── xai_results/                 # XAI plots and CSVs (auto-created)
+|
+└── logs/                        # training logs (auto-created, not uploaded here)
 ```
 
 ### Legacy Scripts
