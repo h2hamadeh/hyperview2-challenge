@@ -97,7 +97,7 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 │   └── xgboost_pipeline.py        # original script (XGBoost, adjustable dropout)
 │
 ├── data/
-│   ├── raw/                     # download datasets from eotdl site
+│   ├── raw/                     # download train/test datasets from eotdl site
 │   │   ├── train/               # {msi_satellite, hsi_satellite, hsi_airborne}/*.npz
 │   │   ├── test/                # {msi_satellite, hsi_satellite}/*.npz
 │   │   └── train_gt.csv         # ground truth labels
