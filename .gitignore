@@ -6,8 +6,9 @@
 # PROJECT-SPECIFIC
 # =============================================================================
 
-# Dataset (can be multiple GBs!)
-data/
+# Dataset (raw imagery can be multiple GBs!) - exceptions for gt csv/wavelengths below
+data/*
+data/raw/*
 *.npz
 
 # Trained models + preprocessors (config: train.model_dir = "features")
@@ -19,12 +20,7 @@ features/
 logs/
 *.log
 
-# XAI outputs (config: xai.output_dir = "xai_results")
-xai_results/
-*.png
-
-# Submissions
-submission.csv
+# Generated CSVs (submission, XAI residuals/importances) - exceptions below
 *.csv
 
 # Temporary work
@@ -75,4 +71,13 @@ desktop.ini
 !.gitkeep
 !**/README.md
 !config.yaml.example
+
+# Data: keep wavelengths + ground truth + generated submission, ignore raw imagery
 !data/wavelengths.json
+!data/raw/
+!data/raw/train_gt.csv
+!data/submission.csv
+
+# Keep XAI outputs (plots + CSVs) - tracked in full
+!xai_results/
+!xai_results/**
