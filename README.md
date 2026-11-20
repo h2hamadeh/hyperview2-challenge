@@ -6,7 +6,6 @@ HYPERVIEW2 is a (now-closed) ESA Φ-Lab / KP Labs challenge - part of the EASi w
 
 The repository here contains a machine learning pipeline for predicting six soil properties from multi-modal **satellite and airborne hyperspectral imagery**, built for the [HYPERVIEW2 Challenge](https://www.igik.edu.pl/en/hyperview-challenge).
 
----
 
 ## Table of Contents
 
@@ -25,7 +24,6 @@ The repository here contains a machine learning pipeline for predicting six soil
 - [Development Notes](#development-notes)
 - [Future Work (& potential improvements to current approach)](#future-work--potential-improvements-to-current-approach)
 
----
 
 ## Problem
 
@@ -46,7 +44,6 @@ The competition metric is the **HYPERVIEW Score**: the average normalized mean s
 HYPERVIEW Score = mean( MSE_i / MSE_baseline_i )   for i in {B, Cu, Zn, Fe, S, Mn}
 ```
 
----
 
 ## Data
 
@@ -66,7 +63,6 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 
 > **Note:** ~10% of fields have zero valid soil pixels when pooled across all three modalities. However, it is concentrated almost entirely in `msi_satellite` (Sentinel-2), which is missing valid soil pixels in ~31% of fields, while `hsi_satellite` and `hsi_airborne` have full coverage. These are handled by the mean falling back to zeros with a logged warning.
 
----
 
 ## Project Structure
 
@@ -121,7 +117,6 @@ The `legacy/` folder contains the original scripts written before the pipeline w
 
 Both scripts share the same core logic as the refactored pipeline (soil pixel extraction, PCA, per-target modelling, HYPERVIEW scoring) but lack configurability, reproducibility, data validation, model persistence, and the feature engineering additions introduced during refactoring.
 
----
 
 ## Pipeline Overview
 
@@ -157,7 +152,6 @@ Evaluate (HYPERVIEW Score, MAE, RMSE, R²)
 [Optional] XAI analysis
 ```
 
----
 
 ## Approach
 
@@ -253,7 +247,6 @@ This produces physically interpretable spectral plots at a fraction of the compu
 | `pred_vs_actual_grid.png` | scatter plots, predicted vs actual, all targets |
 | `spatial_predictions_grid.png` | sequential prediction vs actual trace, all targets |
 
----
 
 ## Configuration
 
@@ -284,7 +277,6 @@ xai:
   wavelengths_path: data/wavelengths.json
 ```
 
----
 
 ## Usage
 
@@ -300,7 +292,6 @@ python generate_submission.py
 
 Trained models and preprocessors are saved to `features/`. Logs are written to `logs/train_pipeline.log`. If XAI is enabled, results are saved to `xai_results/`.
 
----
 
 ## Results
 
@@ -318,7 +309,6 @@ Trained models and preprocessors are saved to `features/`. Logs are written to `
 
 > Scores are on the validation set (30% holdout), current shipped config: filters off, StandardScaler + PCA (10/10/30), XGBoost, `log_transform: false`. Reproduced directly from `train_pipeline.log`.
 
----
 
 ## Development Notes
 
@@ -326,7 +316,6 @@ Trained models and preprocessors are saved to `features/`. Logs are written to `
 - The scoring discrepancy between log-space and original-space evaluation was identified during development - the pipeline now always reports scores in original scale for leaderboard comparability.
 - The XAI shortcut (TreeExplainer + PCA projection) was chosen over a full PermutationExplainer approach for speed, at the cost of approximating the filtering step's effect on band attributions.
 
----
 
 ## Future Work (& potential improvements to current approach)
 
