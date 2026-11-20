@@ -67,28 +67,28 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 ## Project Structure
 
 ```
-├── config.yaml                  # all experiment settings
+├── config.yaml                    # all experiment settings
 │
 ├── scripts/
-│   ├── train_pipeline.py            # main training script
-│   └── generate_submission.py       # inference on test set into submission.csv
+│   ├── train_pipeline.py          # main training script
+│   └── generate_submission.py     # inference on test set into submission.csv
 │   
 ├── src/
 │   ├── data/
-│   │   └── loaders.py           # NPZ loading, soil pixel extraction, train/val split
+│   │   └── loaders.py             # NPZ loading, soil pixel extraction, train/val split
 │   ├── features/
-│   │   ├── pca.py               # variance filter → correlation filter → scaler → PCA
-│   │   └── dropout.py           # modality dropout (training augmentation)
+│   │   ├── pca.py                 # variance filter → correlation filter → scaler → PCA
+│   │   └── dropout.py             # modality dropout (training augmentation)
 │   ├── models/
-│   │   └── train.py             # per-target model training (Random Forest or XGBoost)
+│   │   └── train.py               # per-target model training (Random Forest or XGBoost)
 │   ├── evaluation/
-│   │   ├── metrics.py           # HYPERVIEW score + MAE / RMSE / R²
-│   │   └── xai.py               # SHAP (TreeExplainer) + spectral band importance
+│   │   ├── metrics.py             # HYPERVIEW score + MAE / RMSE / R²
+│   │   └── xai.py                 # SHAP (TreeExplainer) + spectral band importance
 │   ├── validation/
-│   │   └── validate_data.py     # pre-training data integrity checks
+│   │   └── validate_data.py       # pre-training data integrity checks
 │   └── utils/
-│       ├── logger.py            # dual file + console logger
-│       └── reproducibility.py  # global seed setting
+│       ├── logger.py              # dual file + console logger
+│       └── reproducibility.py     # global seed setting
 │
 ├── legacy/
 |   ├── starter_pack.py            # original script from organizers
@@ -96,19 +96,19 @@ In addition, the dataset provides a ground-truth CSV (`train_gt.csv`) of the six
 │   └── xgboost_pipeline.py        # original script (XGBoost, adjustable dropout)
 │
 ├── data/
-│   ├── raw/                     # download train/test datasets from eotdl site
-│   │   ├── train/               # {msi_satellite, hsi_satellite, hsi_airborne}/*.npz
-│   │   ├── test/                # {msi_satellite, hsi_satellite}/*.npz
-│   │   └── train_gt.csv         # ground truth labels
-│   └── wavelengths.json         # band center wavelengths per modality
+│   ├── raw/                       # download train/test datasets from eotdl site
+│   │   ├── train/                 # {msi_satellite, hsi_satellite, hsi_airborne}/*.npz
+│   │   ├── test/                  # {msi_satellite, hsi_satellite}/*.npz
+│   │   └── train_gt.csv           # ground truth labels
+│   └── wavelengths.json           # band center wavelengths per modality
 │
-├── features/                    # saved preprocessors and models (auto-created, not uploaded here)
-|   ├── hyperview2_baseline/     # model_{target}.pkl
-│   └── pca/                     # preprocessor_{modality}.pkl
+├── features/                      # saved preprocessors and models (auto-created, not uploaded here)
+|   ├── hyperview2_baseline/       # model_{target}.pkl
+│   └── pca/                       # preprocessor_{modality}.pkl
 │
-├── xai_results/                 # XAI plots and CSVs (auto-created)
+├── xai_results/                   # XAI plots and CSVs (auto-created)
 |
-└── logs/                        # training logs (auto-created, not uploaded here)
+└── logs/                          # training logs (auto-created, not uploaded here)
 ```
 
 ### Legacy Scripts
